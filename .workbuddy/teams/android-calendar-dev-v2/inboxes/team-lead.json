@@ -1,0 +1,56 @@
+[
+  {
+    "id": "msg-1773108090945-okdens",
+    "from": "android-developer",
+    "to": "team-lead",
+    "type": "message",
+    "content": "收到任务，开始执行Week 4-5日历视图模块开发。我将创建Android项目结构，实现月视图、周视图、日视图，包含手势滑动交互、视图切换动画和农历节日显示功能。",
+    "timestamp": "2026-03-10T02:01:30.945Z",
+    "read": true
+  },
+  {
+    "id": "msg-1773108100100-0l4we4",
+    "from": "qa-engineer",
+    "to": "team-lead",
+    "type": "message",
+    "content": "收到任务指示。当前工作区只有 project-management-plan.md 文件，未找到测试计划与测试用例文档。\n\n请确认：\n1. 测试计划文档是否需要我创建？还是应该在其他位置？\n2. 如果需要创建，请提供已有的测试用例内容参考，以便我继续完善和推进测试工作。\n\n当前项目阶段为 Week 2-3 设计阶段完成，准备进入 Week 4-7 开发阶段。",
+    "timestamp": "2026-03-10T02:01:40.100Z",
+    "read": true
+  },
+  {
+    "id": "msg-1773108889028-gt4tj4",
+    "from": "qa-engineer",
+    "to": "team-lead",
+    "type": "message",
+    "content": "测试计划与测试用例文档已创建完成，文件位置：\n/Users/alex/WorkBuddy/20260309174106/test-plan-and-cases.md\n\n**文档内容概要**：\n\n**一、功能测试用例（80+用例）**\n1. 日历视图模块：TC-CAL-001~010（10个用例）\n2. 事件管理模块：TC-EVT-001~015（15个用例）\n3. 提醒系统模块：TC-REM-001~010（10个用例）\n4. 同步功能模块：TC-SYNC-001~010（10个用例）\n5. 搜索功能模块：TC-SEARCH-001~008（8个用例）\n6. 个人设置模块：TC-SET-001~010（10个用例）\n7. 第三方日历集成模块：TC-INT-001~008（8个用例）\n\n**二、专项测试用例（20+用例）**\n1. 权限适配测试（Android 13+通知权限重点）\n2. 农历算法测试（正确性、闰月处理）\n3. 同步冲突测试（冲突检测与解决）\n4. 兼容性测试（版本、品牌ROM、屏幕适配）\n\n**三、配套方案**\n- 性能测试方案（启动<2秒、内存<100MB）\n- 安全测试方案（数据、权限、网络、隐私）\n- 测试环境配置（7台设备覆盖主流品牌）\n- Bug管理流程（P0-P3分级、修复时效）\n- 测试进度计划（Week 4-12分阶段）\n\n下一步工作建议：准备测试环境、参与设计评审、开始冒烟测试准备。",
+    "timestamp": "2026-03-10T02:14:49.028Z",
+    "read": true
+  },
+  {
+    "id": "msg-1773109179854-mw2qbt",
+    "from": "android-developer",
+    "to": "team-lead",
+    "type": "message",
+    "content": "**日历视图模块开发完成汇报**\n\n已完成所有Week 4-5任务，交付成果如下：\n\n**核心功能**：\n1. 月视图、周视图、日视图组件（完整实现）\n2. 手势滑动交互（左右切换）\n3. 视图切换动画（平滑过渡）\n4. 农历节日显示（自研算法）\n\n**项目文件**：\n- 项目结构：模块化设计（app/feature/calendar/core）\n- 核心文件：20+个Kotlin文件\n- 配置文件：完整的Gradle配置\n- 文档：README.md + WEEK4-5-DELIVERY.md\n\n**技术栈**：\n- Kotlin 1.9.21\n- Jetpack Compose + Material 3\n- Hilt依赖注入\n- Clean Architecture\n\n**关键代码位置**：\n- 主界面：feature/calendar/src/main/java/com/calendar/feature/calendar/CalendarScreen.kt\n- 农历算法：core/common/src/main/java/com/calendar/core/common/util/ChineseCalendarHelper.kt\n- 数据模型：core/domain/src/main/java/com/calendar/core/domain/model/\n\n详细功能说明请查看项目根目录的WEEK4-5-DELIVERY.md文档。",
+    "timestamp": "2026-03-10T02:19:39.854Z",
+    "read": true
+  },
+  {
+    "id": "msg-1773109253932-tksoel",
+    "from": "project-manager",
+    "to": "team-lead",
+    "type": "message",
+    "content": "项目经理周报汇报：\n\n**Week 4-5 项目进度总结**：\n\n**里程碑完成情况**：\n✅ M1: 需求分析（Week 1）- 已完成\n✅ M2: 设计阶段（Week 2-3）- 已完成\n🔄 M3: 核心功能开发（Week 4-7）- Week 4-5已100%完成日历视图模块\n\n**Android开发进度**（Week 4-5）：\n✅ 月视图、周视图、日视图开发 - 100%\n✅ 手势滑动交互 - 100%\n✅ 视图切换动画 - 100%\n✅ 农历节日显示 - 100%\n\n**技术成果**：\n- 自研农历算法（ChineseCalendarHelper），支持1900-2100年\n- 完整的节日和节气计算（30个节日 + 24节气）\n- MVVM + Clean Architecture架构\n- Jetpack Compose + Material Design 3\n- 20+核心文件，完整文档\n\n**测试准备**：\n✅ 测试计划完成（80+功能用例 + 20+专项用例）\n⏳ 测试环境准备中（等待后端服务部署）\n\n**后端开发状态**：\n- 等待后端开发汇报基础服务搭建进度\n- 已协调测试账号和测试环境需求\n\n**风险监控**：\n- ✅ 农历算法风险已解决（自研方案）\n- ✅ 测试计划提前完成（测试左移策略生效）\n- ⚠️ 后端服务测试环境待确认\n- ⚠️ 接口联调时间需明确\n\n**下周工作重点**（Week 5-6）：\n- Android：事件管理模块开发\n- 后端：核心接口开发（事件CRUD）\n- 测试：日历视图模块功能测试\n- 协作：Android与后端接口对齐\n\n**建议**：\n- 尽快确认后端测试环境地址\n- 组织Android与后端接口联调会议\n- 启动每日站会制度，加强沟通效率",
+    "timestamp": "2026-03-10T02:20:53.932Z",
+    "read": true
+  },
+  {
+    "id": "msg-1773110455509-a0c0ia",
+    "from": "project-manager",
+    "to": "team-lead",
+    "type": "message",
+    "content": "收到团队lead通知，Android和后端开发任务已全面启动。\n\n**项目协调方案**：\n\n**1. 并行开发协调**\n根据项目管理计划，Android和后端需要同步推进：\n- Android：事件管理模块 + 提醒功能模块\n- 后端：基础服务 + 核心API + 数据同步服务\n\n**关键协作点**：\n- 接口规范对齐（事件、用户、提醒数据模型）\n- 接口文档共享（建议使用Swagger/OpenAPI）\n- 接口Mock服务（便于前端先行开发）\n\n**2. 接口联调安排**\n建议分阶段进行：\n- Week 5：基础接口联调（用户认证、事件CRUD）\n- Week 6：提醒功能接口联调\n- Week 7：数据同步接口联调\n\n**3. 测试环境准备**\n需要后端开发提供：\n- 测试服务器地址\n- 测试账号（至少2个）\n- 测试数据库访问权限\n- API文档地址\n\n**4. 资源配置建议**\n- 建立接口文档共享机制（Confluence/Notion）\n- 配置接口Mock服务（便于并行开发）\n- 启动每日站会（每天上午10:00，15分钟）\n- 建立接口变更通知机制\n\n**5. 风险监控**\n- 关注后端服务部署进度（影响Android接口联调）\n- 关注接口定义稳定性（避免频繁变更）\n- 监控开发进度（每周任务完成率≥90%）\n\n请各位按照任务指令推进，有问题及时反馈，我会持续协调资源。",
+    "timestamp": "2026-03-10T02:40:55.509Z",
+    "read": true
+  }
+]

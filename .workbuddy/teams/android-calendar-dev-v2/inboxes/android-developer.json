@@ -1,0 +1,65 @@
+[
+  {
+    "id": "msg-1773108116328-7gs4yu",
+    "from": "team-lead",
+    "to": "android-developer",
+    "type": "message",
+    "content": "请开始创建Android项目代码，按照技术方案实现日历视图模块。项目目录在 /Users/alex/WorkBuddy/20260309174106",
+    "timestamp": "2026-03-10T02:01:56.328Z",
+    "read": true
+  },
+  {
+    "id": "msg-1773108969824-xi61np",
+    "from": "project-manager",
+    "to": "android-developer",
+    "type": "message",
+    "content": "你好，我是项目经理。\n\n项目已进入Week 4-5核心功能开发阶段，根据项目管理计划，你负责日历视图模块开发。\n\n**请汇报当前开发进度**：\n\n**Week 4-5任务清单**：\n- [ ] 月视图、周视图、日视图开发 - 完成度？\n- [ ] 手势滑动交互 - 完成度？\n- [ ] 视图切换动画 - 完成度？\n- [ ] 农历节日显示 - 完成度？\n\n**技术风险关注**：\n- 农历转换算法是否已选定开源库（lunar-android / joda-time扩展）？\n- 是否遇到Android 13+权限适配问题？\n- 是否需要技术攻关支持？\n\n**开发环境与协作**：\n- 代码仓库是否已配置？\n- 是否已开始Code Review流程？\n- 是否有阻碍开发的问题？\n\n请详细说明当前进展、遇到的困难以及需要的支持。",
+    "timestamp": "2026-03-10T02:16:09.824Z",
+    "read": true
+  },
+  {
+    "id": "msg-1773109253703-54yoq6",
+    "from": "project-manager",
+    "to": "android-developer",
+    "type": "message",
+    "content": "收到Android开发的详细汇报，Week 4-5日历视图模块开发已100%完成，非常高效！\n\n**项目评审意见**：\n\n✅ **优秀表现**：\n- 日历视图模块功能完整，超出预期\n- 自研农历算法方案合理，控制权和包体积优化到位\n- 架构设计规范（MVVM + Clean Architecture + Jetpack Compose）\n- 代码质量优秀，文档齐全\n\n✅ **技术方案认可**：\n- ChineseCalendarHelper自研实现方案可行\n- 支持1900-2100年范围足够覆盖用户需求\n- 15个传统节日 + 15个公历节日 + 24节气，功能完善\n- Android 13+权限适配计划合理（Week 6-7实现）\n\n✅ **项目进度确认**：\n- Week 4-5任务：已完成 ✅\n- 代码文件：20+核心文件\n- 文档完善：README + WEEK4-5-DELIVERY.md\n\n**Week 5-6工作提醒**：\n\n**事件管理模块开发**：\n- [ ] 事件创建/编辑界面\n- [ ] Room数据库集成\n- [ ] 事件列表展示\n- [ ] 事件搜索功能\n- [ ] 事件分类管理\n\n**风险关注**：\n- Room数据库设计需要与后端数据库设计对齐\n- 数据同步接口需要提前设计\n- 需要与后端开发协调事件CRUD接口规范\n\n**协作建议**：\n- 与后端开发进行接口对齐会议\n- 确认事件数据模型定义\n- 准备Week 5-6开发任务分解\n\n请继续推进事件管理模块开发，如有需要协调的事项及时反馈。",
+    "timestamp": "2026-03-10T02:20:53.703Z",
+    "read": true
+  },
+  {
+    "id": "msg-1773109329101-ey9l3b",
+    "from": "project-manager",
+    "to": "android-developer",
+    "type": "message",
+    "content": "收到Week 5-6开发计划确认，事件管理模块开发已启动，工作安排合理。\n\n**项目管理支持**：\n\n**1. 接口对齐协调**\n- ✅ 已向后端开发发送接口需求确认\n- 建议双方尽快对齐事件数据模型定义\n- 关键字段：事件ID、标题、时间、重复规则、分类、提醒设置\n\n**2. Room数据库设计建议**\n- 与后端数据库结构保持一致，便于同步\n- 考虑离线模式支持\n- 需要版本字段用于冲突处理（参考风险管理计划中的Vector Clock机制）\n\n**3. Week 5-6关键节点**\n- Week 5：事件创建/编辑界面 + Room数据库\n- Week 6：事件列表展示 + 搜索功能 + 分类管理\n- 预计Week 6末完成事件管理模块\n\n**4. 风险提醒**\n- 后端事件CRUD接口需同步开发\n- 数据同步方案需要提前设计（Week 6-7）\n- Android 13+权限适配准备（Week 6-7提醒功能）\n\n**5. 协作机制**\n- 如需接口联调会议，请提前告知\n- 每日站会建议启动（每天上午10:00）\n- 遇到技术难点及时反馈\n\n继续推进，有问题随时沟通。",
+    "timestamp": "2026-03-10T02:22:09.101Z",
+    "read": true
+  },
+  {
+    "id": "msg-1773110035763-b9k9k4",
+    "from": "team-lead",
+    "to": "android-developer",
+    "type": "message",
+    "content": "后端开发正在启动中。请继续推进Week 5-6事件管理模块开发：\n\n**Week 5-6 任务**:\n1. 事件创建/编辑界面\n   - 表单布局\n   - 日期时间选择器\n   - 提醒设置\n   \n2. 事件列表展示\n   - 日程列表组件\n   - 事件卡片设计\n   \n3. 本地数据存储（优先）\n   - Room数据库集成\n   - EventEntity设计\n   - 本地CRUD操作\n\n4. 后端API对接（待后端就绪）\n   - Retrofit接口定义\n   - 数据同步逻辑\n\n可以先使用本地Room数据库开发，等后端API就绪后再对接。",
+    "timestamp": "2026-03-10T02:33:55.763Z",
+    "read": true
+  },
+  {
+    "id": "msg-1773110365619-edzmxi",
+    "from": "team-lead",
+    "to": "android-developer",
+    "type": "message",
+    "content": "**Android开发任务 - 事件管理和提醒功能模块**\n\n请继续完成以下两个模块的开发：\n\n## 一、事件管理模块 (Week 5-6)\n\n### 1. 事件创建/编辑界面\n**文件位置**: `feature/event/src/main/java/com/calendar/feature/event/`\n\n**功能要求**:\n- 事件标题输入（必填）\n- 日期选择器（开始日期、结束日期）\n- 时间选择器（开始时间、结束时间）\n- 全天事件开关\n- 地点输入\n- 描述输入\n- 颜色标记选择（8种预设颜色）\n- 分类选择（工作、个人、家庭等）\n- 重复规则设置\n  - 不重复\n  - 每天\n  - 每周\n  - 每月\n  - 每年\n  - 自定义\n- 提醒设置入口\n\n**UI组件**:\n```kotlin\n@Composable\nfun EventEditScreen(\n    eventId: Long? = null,  // null表示新建\n    onSave: (CalendarEvent) -> Unit,\n    onCancel: () -> Unit\n)\n\n@Composable\nfun DatePickerField(\n    label: String,\n    selectedDate: LocalDate,\n    onDateSelected: (LocalDate) -> Unit\n)\n\n@Composable\nfun TimePickerField(\n    label: String,\n    selectedTime: LocalTime,\n    onTimeSelected: (LocalTime) -> Unit\n)\n\n@Composable\nfun RecurrenceRuleSelector(\n    rule: RepeatRule,\n    onRuleChanged: (RepeatRule) -> Unit\n)\n\n@Composable\nfun ColorPicker(\n    selectedColor: EventColor,\n    onColorSelected: (EventColor) -> Unit\n)\n```\n\n### 2. 事件列表展示\n**文件位置**: `feature/event/src/main/java/com/calendar/feature/event/components/EventListView.kt`\n\n**功能要求**:\n- 日程列表（按时间排序）\n- 事件卡片设计\n  - 标题、时间、地点\n  - 颜色标记\n  - 分类标签\n- 支持展开/折叠\n- 点击跳转详情\n- 长按显示操作菜单（编辑、删除）\n\n**UI组件**:\n```kotlin\n@Composable\nfun EventListView(\n    events: List<CalendarEvent>,\n    onEventClick: (CalendarEvent) -> Unit,\n    onEventLongPress: (CalendarEvent) -> Unit\n)\n\n@Composable\nfun EventCard(\n    event: CalendarEvent,\n    onClick: () -> Unit,\n    onLongPress: () -> Unit\n)\n```\n\n### 3. 事件搜索功能\n**文件位置**: `feature/search/src/main/java/com/calendar/feature/search/`\n\n**功能要求**:\n- 搜索框UI\n- 关键词搜索\n- 高级筛选\n  - 日期范围\n  - 分类\n  - 颜色\n- 搜索结果列表\n- 搜索历史\n\n**UI组件**:\n```kotlin\n@Composable\nfun SearchScreen(\n    onEventClick: (CalendarEvent) -> Unit\n)\n\n@Composable\nfun SearchBar(\n    query: String,\n    onQueryChanged: (String) -> Unit,\n    onSearch: (String) -> Unit\n)\n\n@Composable\nfun FilterPanel(\n    filters: SearchFilters,\n    onFiltersChanged: (SearchFilters) -> Unit\n)\n```\n\n### 4. 本地数据存储（Room数据库）\n**文件位置**: `core/data/src/main/java/com/calendar/core/data/local/`\n\n**Room实体**:\n```kotlin\n@Entity(tableName = \"events\")\ndata class EventEntity(\n    @PrimaryKey(autoGenerate = true)\n    val id: Long = 0,\n    val title: String,\n    val description: String?,\n    val startTime: Long,  // 时间戳\n    val endTime: Long,\n    val isAllDay: Boolean = false,\n    val location: String?,\n    val color: String = \"#3498db\",\n    val category: String = \"default\",\n    val repeatRule: String?,  // JSON格式\n    val reminders: String?,   // JSON格式\n    val calendarId: Long,\n    val isSynced: Boolean = false,\n    val version: Long = 0,\n    val createdAt: Long,\n    val updatedAt: Long\n)\n\n@Entity(tableName = \"calendars\")\ndata class CalendarEntity(\n    @PrimaryKey(autoGenerate = true)\n    val id: Long = 0,\n    val name: String,\n    val color: String = \"#3498db\",\n    val isDefault: Boolean = false\n)\n```\n\n**Room DAO**:\n```kotlin\n@Dao\ninterface EventDao {\n    @Query(\"SELECT * FROM events WHERE calendarId = :calendarId ORDER BY startTime ASC\")\n    suspend fun getEventsByCalendar(calendarId: Long): List<EventEntity>\n    \n    @Query(\"SELECT * FROM events WHERE id = :id\")\n    suspend fun getEventById(id: Long): EventEntity?\n    \n    @Insert(onConflict = OnConflictStrategy.REPLACE)\n    suspend fun insertEvent(event: EventEntity): Long\n    \n    @Update\n    suspend fun updateEvent(event: EventEntity)\n    \n    @Delete\n    suspend fun deleteEvent(event: EventEntity)\n    \n    @Query(\"SELECT * FROM events WHERE title LIKE :query OR description LIKE :query\")\n    suspend fun searchEvents(query: String): List<EventEntity>\n    \n    @Query(\"SELECT * FROM events WHERE startTime BETWEEN :start AND :end ORDER BY startTime ASC\")\n    suspend fun getEventsBetween(start: Long, end: Long): List<EventEntity>\n}\n```\n\n**Repository**:\n```kotlin\nclass EventRepository @Inject constructor(\n    private val eventDao: EventDao,\n    private val calendarDao: CalendarDao,\n    private val apiService: CalendarApiService  // 后端API（待对接）\n) {\n    suspend fun getEvents(calendarId: Long): List<CalendarEvent>\n    suspend fun createEvent(event: CalendarEvent): CalendarEvent\n    suspend fun updateEvent(event: CalendarEvent): CalendarEvent\n    suspend fun deleteEvent(eventId: Long)\n    suspend fun searchEvents(query: String): List<CalendarEvent>\n}\n```\n\n---\n\n## 二、提醒功能模块 (Week 6-7)\n\n### 1. 本地提醒实现\n**文件位置**: `core/notification/src/main/java/com/calendar/core/notification/`\n\n**AlarmManager集成**:\n```kotlin\nclass ReminderScheduler @Inject constructor(\n    private val context: Context\n) {\n    fun scheduleReminder(reminder: Reminder)\n    fun cancelReminder(reminderId: Long)\n    fun scheduleRecurringReminder(reminder: Reminder, rule: RepeatRule)\n}\n\nclass ReminderReceiver : BroadcastReceiver() {\n    override fun onReceive(context: Context, intent: Intent) {\n        // 显示通知\n        // 播放铃声\n        // 震动\n    }\n}\n```\n\n### 2. 通知管理\n**文件位置**: `core/notification/src/main/java/com/calendar/core/notification/NotificationHelper.kt`\n\n**功能要求**:\n- 创建通知渠道（Android 8.0+）\n- 显示通知\n  - 标题、内容\n  - 大图标\n  - 点击跳转到事件详情\n  - 操作按钮（标记完成、延后）\n- 通知声音\n- 震动\n\n```kotlin\nclass NotificationHelper @Inject constructor(\n    private val context: Context\n) {\n    fun createNotificationChannel()\n    fun showEventReminder(event: CalendarEvent, reminder: Reminder)\n    fun showUpcomingEvent(event: CalendarEvent, minutesBefore: Int)\n}\n```\n\n### 3. 权限申请流程（Android 13+重点）\n**文件位置**: `core/permission/src/main/java/com/calendar/core/permission/`\n\n**权限处理**:\n```kotlin\n@Composable\nfun PermissionHandler(\n    onPermissionGranted: () -> Unit,\n    onPermissionDenied: () -> Unit\n)\n\n@Composable\nfun PermissionRequestDialog(\n    permission: String,\n    rationale: String,\n    onConfirm: () -> Unit,\n    onDismiss: () -> Unit\n)\n```\n\n**需要申请的权限**:\n- POST_NOTIFICATIONS (Android 13+)\n- SCHEDULE_EXACT_ALARM (Android 12+)\n- VIBRATE\n\n### 4. 重复规则引擎\n**文件位置**: `core/common/src/main/java/com/calendar/core/common/recurrence/`\n\n**支持规则**:\n- 不重复\n- 每天\n- 每周（指定星期几）\n- 每月（指定日期）\n- 每年\n- 自定义间隔（每N天/周/月）\n\n```kotlin\nclass RecurrenceEngine {\n    fun generateOccurrences(\n        rule: RepeatRule,\n        startDate: LocalDate,\n        endDate: LocalDate?,\n        count: Int?\n    ): List<LocalDate>\n    \n    fun getNextOccurrence(\n        rule: RepeatRule,\n        currentDate: LocalDate\n    ): LocalDate?\n}\n\ndata class RepeatRule(\n    val frequency: Frequency,  // DAILY, WEEKLY, MONTHLY, YEARLY\n    val interval: Int = 1,     // 间隔\n    val byDay: List<DayOfWeek>? = null,  // 星期几\n    val byMonthDay: List<Int>? = null,   // 每月第几天\n    val count: Int? = null,    // 重复次数\n    val until: LocalDate? = null  // 结束日期\n)\n```\n\n### 5. 提醒设置界面\n**文件位置**: `feature/event/src/main/java/com/calendar/feature/event/components/ReminderSettings.kt`\n\n**功能要求**:\n- 添加多个提醒\n- 提醒时间选择（提前N分钟/小时/天）\n- 提醒方式选择（通知、铃声、震动）\n- 删除提醒\n\n```kotlin\n@Composable\nfun ReminderSettings(\n    reminders: List<Reminder>,\n    onRemindersChanged: (List<Reminder>) -> Unit\n)\n\n@Composable\nfun ReminderItem(\n    reminder: Reminder,\n    onEdit: (Reminder) -> Unit,\n    onDelete: () -> Unit\n)\n```\n\n---\n\n## 三、与后端API对接\n\n### Retrofit接口定义\n**文件位置**: `core/data/src/main/java/com/calendar/core/data/remote/CalendarApiService.kt`\n\n```kotlin\ninterface CalendarApiService {\n    // 认证\n    @POST(\"api/v1/auth/login\")\n    suspend fun login(@Body request: LoginRequest): Response<AuthResponse>\n    \n    @POST(\"api/v1/auth/register\")\n    suspend fun register(@Body request: RegisterRequest): Response<AuthResponse>\n    \n    // 事件\n    @GET(\"api/v1/calendars/{calendarId}/events\")\n    suspend fun getEvents(@Path(\"calendarId\") calendarId: Long): Response<List<EventDto>>\n    \n    @POST(\"api/v1/events\")\n    suspend fun createEvent(@Body event: EventDto): Response<EventDto>\n    \n    @PUT(\"api/v1/events/{id}\")\n    suspend fun updateEvent(@Path(\"id\") id: Long, @Body event: EventDto): Response<EventDto>\n    \n    @DELETE(\"api/v1/events/{id}\")\n    suspend fun deleteEvent(@Path(\"id\") id: Long): Response<Unit>\n    \n    // 同步\n    @POST(\"api/v1/sync/push\")\n    suspend fun pushChanges(@Body request: SyncRequest): Response<SyncResponse>\n    \n    @GET(\"api/v1/sync/pull\")\n    suspend fun pullChanges(@Query(\"lastSyncTime\") lastSyncTime: Long): Response<SyncResponse>\n}\n```\n\n---\n\n## 四、开发优先级\n\n**第一阶段（本周）**:\n1. Room数据库集成\n2. 事件创建/编辑界面\n3. 事件列表展示\n4. 本地提醒实现\n\n**第二阶段（下周）**:\n1. 事件搜索功能\n2. 重复规则引擎\n3. 权限申请流程\n4. 后端API对接\n\n请开始编写代码，将所有文件创建到相应的模块中。",
+    "timestamp": "2026-03-10T02:39:25.619Z",
+    "read": true
+  },
+  {
+    "id": "msg-1773111024808-qdq2ip",
+    "from": "team-lead",
+    "to": "android-developer",
+    "type": "message",
+    "content": "请汇报当前的开发进展，包括：\n\n1. 已完成的代码文件清单\n2. 当前进度百分比\n3. 遇到的技术难点或阻塞问题\n4. 预计完成时间\n\n项目目录: /Users/alex/WorkBuddy/20260309174106",
+    "timestamp": "2026-03-10T02:50:24.808Z",
+    "read": true
+  }
+]

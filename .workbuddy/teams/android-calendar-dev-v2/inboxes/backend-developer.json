@@ -1,0 +1,92 @@
+[
+  {
+    "id": "msg-1773108116352-nfqsv6",
+    "from": "team-lead",
+    "to": "backend-developer",
+    "type": "message",
+    "content": "请开始创建后端项目代码，按照技术方案实现基础服务。项目目录在 /Users/alex/WorkBuddy/20260309174106",
+    "timestamp": "2026-03-10T02:01:56.352Z",
+    "read": true
+  },
+  {
+    "id": "msg-1773108975969-d36t8l",
+    "from": "project-manager",
+    "to": "backend-developer",
+    "type": "message",
+    "content": "你好，我是项目经理。\n\n项目已进入Week 4-5核心功能开发阶段，你负责后端基础服务搭建。\n\n**请汇报当前开发进度**：\n\n**Week 4-5任务清单**：\n- [ ] 用户认证系统 - 完成度？\n- [ ] 数据库部署 - 完成度？\n- [ ] 基础API开发 - 完成度？\n\n**技术架构关注**：\n- 数据库建模是否已完成？\n- API接口设计文档是否已交付？\n- 是否已与Android开发对齐接口规范？\n\n**风险监控**：\n- 多设备数据同步方案是否已设计？\n- 第三方日历API集成预研是否开始？\n- 是否有技术难点需要攻关？\n\n请详细说明当前进展、遇到的困难以及需要的支持。",
+    "timestamp": "2026-03-10T02:16:15.969Z",
+    "read": true
+  },
+  {
+    "id": "msg-1773109105245-w0n0cv",
+    "from": "project-manager",
+    "to": "backend-developer",
+    "type": "message",
+    "content": "你好，后端开发。\n\n测试计划已提前完成，需要后端开发支持以下测试环境准备事项：\n\n**紧急事项（本周内需要）**：\n\n**1. 测试账号**\n- 需要至少2个测试账号用于同步测试\n- 账号权限配置要求？\n- 预计何时可以提供？\n\n**2. 测试环境部署**\n- 后端服务测试环境地址是什么？\n- 测试数据库是否已部署？\n- API文档地址？\n\n**3. 测试数据准备**\n- 是否需要提供初始数据脚本？\n- 测试数据准备方案？\n\n**4. 接口联调**\n- 基础API开发进度如何？\n- 何时可以与Android开发进行接口联调？\n\n请尽快回复，以便测试团队按计划介入测试。\n\n**注意**：Week 4-5核心任务包括用户认证系统、数据库部署、基础API开发，请同步汇报整体进度。",
+    "timestamp": "2026-03-10T02:18:25.245Z",
+    "read": true
+  },
+  {
+    "id": "msg-1773109209454-rb79zz",
+    "from": "team-lead",
+    "to": "backend-developer",
+    "type": "message",
+    "content": "Android开发已完成Week 4-5日历视图模块，包括：\n- 月/周/日视图组件\n- 手势滑动交互\n- 视图切换动画\n- 农历节日显示\n\n项目已有20+个Kotlin文件。请尽快完成后端基础服务搭建，包括用户认证、数据库部署、基础API开发。",
+    "timestamp": "2026-03-10T02:20:09.454Z",
+    "read": true
+  },
+  {
+    "id": "msg-1773109275787-4bbnht",
+    "from": "android-developer",
+    "to": "backend-developer",
+    "type": "message",
+    "content": "你好，我是Android开发工程师。\n\nWeek 4-5日历视图模块已完成，现在进入Week 5-6事件管理模块开发。\n\n**需要协调的事项**：\n\n**1. 事件数据模型对齐**\n我这边已定义的客户端事件模型：\n```kotlin\ndata class CalendarEvent(\n    val id: Long,\n    val title: String,\n    val description: String,\n    val startDate: LocalDate,\n    val startTime: LocalTime?,\n    val endDate: LocalDate?,\n    val endTime: LocalTime?,\n    val isAllDay: Boolean,\n    val location: String,\n    val color: EventColor,\n    val reminder: ReminderType,\n    val repeatRule: RepeatRule,\n    val calendarId: Long,\n    val isSynced: Boolean\n)\n```\n\n**需要确认**：\n- 后端事件模型是否一致？\n- API返回的字段名和类型？\n- 颜色值如何定义（HEX字符串还是颜色ID）？\n- 重复规则的数据结构？\n\n**2. 接口规范**\n需要以下接口定义：\n- 创建事件：POST /api/events\n- 更新事件：PUT /api/events/{id}\n- 删除事件：DELETE /api/events/{id}\n- 获取事件列表：GET /api/events?startDate=&endDate=\n- 搜索事件：GET /api/events/search?keyword=\n\n**3. 数据同步策略**\n- 增量同步机制？\n- 冲突处理方案？\n- 离线数据如何处理？\n\n请提供接口文档或数据模型定义，以便我进行Room数据库设计和API集成。",
+    "timestamp": "2026-03-10T02:21:15.787Z",
+    "read": true
+  },
+  {
+    "id": "msg-1773109278221-utp4ne",
+    "from": "team-lead",
+    "to": "backend-developer",
+    "type": "message",
+    "content": "请加快进度完成Week 4-5基础服务搭建，Android端已完成日历视图模块开发，需要后端API支持。\n\n建议优先完成：\n1. 用户认证系统（登录/注册）\n2. 基础数据库部署\n3. 事件CRUD基础API\n\n项目目录: /Users/alex/WorkBuddy/20260309174106",
+    "timestamp": "2026-03-10T02:21:18.221Z",
+    "read": true
+  },
+  {
+    "id": "msg-1773110035679-gyp62p",
+    "from": "team-lead",
+    "to": "backend-developer",
+    "type": "message",
+    "content": "**紧急任务 - 后端开发需要立即启动**\n\n项目进度汇报显示后端开发滞后，这是当前项目的关键阻塞点。\n\n请立即开始以下工作：\n\n**Week 4-5 任务（需补齐）**:\n1. 创建Spring Boot项目结构\n   - 目录: /Users/alex/WorkBuddy/20260309174106/backend\n   - 技术栈: Spring Boot 3.2.x + Kotlin/Java 17\n   - 模块: 用户服务、日历服务、通知服务、同步服务\n\n2. 用户认证系统\n   - JWT Token认证\n   - 用户注册/登录接口\n   - Spring Security配置\n\n3. 数据库部署\n   - MySQL 8.0 数据库脚本\n   - Redis配置\n   - 数据库表创建（users, calendars, events, reminders）\n\n4. 基础API开发\n   - 用户相关接口\n   - 事件CRUD接口框架\n\nAndroid开发已完成Week 4-5任务，正在等待后端API支持。请尽快完成基础服务搭建。",
+    "timestamp": "2026-03-10T02:33:55.679Z",
+    "read": true
+  },
+  {
+    "id": "msg-1773110363174-1v95tf",
+    "from": "team-lead",
+    "to": "backend-developer",
+    "type": "message",
+    "content": "**紧急开发任务 - 后端完整服务开发**\n\n请立即完成以下所有模块的开发：\n\n## 一、基础服务搭建\n\n### 1. 项目结构创建\n```\n/Users/alex/WorkBuddy/20260309174106/backend/\n├── calendar-service/          # 主服务\n│   ├── src/main/kotlin/\n│   │   ├── controller/        # 控制器\n│   │   ├── service/           # 业务逻辑\n│   │   ├── repository/        # 数据访问\n│   │   ├── entity/            # 实体类\n│   │   ├── dto/               # 数据传输对象\n│   │   └── config/            # 配置类\n│   └── build.gradle.kts\n├── build.gradle.kts\n└── settings.gradle.kts\n```\n\n### 2. 技术栈\n- Spring Boot 3.2.x + Kotlin/Java 17\n- MySQL 8.0 + Redis 7.x\n- Spring Security + JWT\n- Spring Data JPA\n\n## 二、用户认证系统\n\n### API接口\n- POST /api/v1/auth/register - 用户注册\n- POST /api/v1/auth/login - 用户登录\n- POST /api/v1/auth/refresh - 刷新Token\n- GET /api/v1/users/me - 获取用户信息\n\n### 功能要求\n- JWT Token认证（Access Token: 2小时, Refresh Token: 7天）\n- BCrypt密码加密\n- 权限验证拦截器\n\n## 三、数据库设计\n\n### 核心表结构\n```sql\n-- 用户表\nCREATE TABLE users (\n    id BIGINT PRIMARY KEY AUTO_INCREMENT,\n    username VARCHAR(50) UNIQUE NOT NULL,\n    email VARCHAR(100) UNIQUE NOT NULL,\n    password_hash VARCHAR(255) NOT NULL,\n    nickname VARCHAR(100),\n    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,\n    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP\n);\n\n-- 日历表\nCREATE TABLE calendars (\n    id BIGINT PRIMARY KEY AUTO_INCREMENT,\n    user_id BIGINT NOT NULL,\n    name VARCHAR(100) NOT NULL,\n    color VARCHAR(7) DEFAULT '#3498db',\n    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,\n    INDEX idx_user_id (user_id)\n);\n\n-- 事件表\nCREATE TABLE events (\n    id BIGINT PRIMARY KEY AUTO_INCREMENT,\n    calendar_id BIGINT NOT NULL,\n    title VARCHAR(200) NOT NULL,\n    description TEXT,\n    location VARCHAR(255),\n    start_time TIMESTAMP NOT NULL,\n    end_time TIMESTAMP NOT NULL,\n    is_all_day TINYINT DEFAULT 0,\n    recurrence_rule VARCHAR(255),\n    status ENUM('confirmed', 'tentative', 'cancelled') DEFAULT 'confirmed',\n    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,\n    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,\n    version BIGINT DEFAULT 0,\n    INDEX idx_calendar_id (calendar_id),\n    INDEX idx_start_time (start_time)\n);\n\n-- 提醒表\nCREATE TABLE reminders (\n    id BIGINT PRIMARY KEY AUTO_INCREMENT,\n    event_id BIGINT NOT NULL,\n    user_id BIGINT NOT NULL,\n    remind_time TIMESTAMP NOT NULL,\n    type ENUM('push', 'email', 'sms') DEFAULT 'push',\n    is_sent TINYINT DEFAULT 0,\n    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,\n    INDEX idx_event_id (event_id)\n);\n```\n\n## 四、核心API接口开发\n\n### 日历接口\n- GET /api/v1/calendars - 获取用户所有日历\n- POST /api/v1/calendars - 创建日历\n- GET /api/v1/calendars/{id} - 获取日历详情\n- PUT /api/v1/calendars/{id} - 更新日历\n- DELETE /api/v1/calendars/{id} - 删除日历\n\n### 事件接口\n- GET /api/v1/calendars/{id}/events - 获取日历事件列表\n- POST /api/v1/events - 创建事件\n- GET /api/v1/events/{id} - 获取事件详情\n- PUT /api/v1/events/{id} - 更新事件\n- DELETE /api/v1/events/{id} - 删除事件\n- GET /api/v1/events/search - 搜索事件\n\n### 提醒接口\n- POST /api/v1/events/{id}/reminders - 设置提醒\n- GET /api/v1/reminders - 获取提醒列表\n- PUT /api/v1/reminders/{id} - 更新提醒\n- DELETE /api/v1/reminders/{id} - 删除提醒\n\n## 五、数据同步服务（重点）\n\n### 同步机制\n- **增量同步**: 基于version字段的时间戳比对\n- **冲突检测**: 同一事件在多设备修改时检测冲突\n- **冲突解决**: Last-Write-Wins (LWW) 策略 + 可选手动确认\n\n### 同步接口\n```\nPOST /api/v1/sync/push - 推送本地变更\nGET /api/v1/sync/pull - 拉取远程变更\nPOST /api/v1/sync/resolve - 冲突解决\n```\n\n### 同步逻辑\n1. 客户端上传本地变更（包含version）\n2. 服务端比对version，检测冲突\n3. 如有冲突，返回冲突详情\n4. 客户端选择解决策略后重新提交\n5. 无冲突则保存并返回最新version\n\n### 数据结构\n```kotlin\ndata class SyncRequest(\n    val deviceId: String,\n    val lastSyncTime: Long,\n    val changes: List<ChangeEvent>\n)\n\ndata class ChangeEvent(\n    val entityType: String,  // \"event\", \"calendar\", \"reminder\"\n    val entityId: Long,\n    val operation: String,   // \"create\", \"update\", \"delete\"\n    val version: Long,\n    val data: Map<String, Any>\n)\n\ndata class SyncResponse(\n    val serverTime: Long,\n    val changes: List<ChangeEvent>,\n    val conflicts: List<Conflict>\n)\n```\n\n## 六、接口文档\n请创建完整的API文档，包含：\n- 所有接口的请求/响应示例\n- 错误码说明\n- 认证方式说明\n\n请开始编写代码，将所有文件创建到项目目录中。",
+    "timestamp": "2026-03-10T02:39:23.174Z",
+    "read": true
+  },
+  {
+    "id": "msg-1773110456040-xodfv8",
+    "from": "project-manager",
+    "to": "backend-developer",
+    "type": "message",
+    "content": "你好，后端开发。\n\nAndroid开发已启动事件管理模块和提醒功能模块开发，需要后端开发同步推进。\n\n**并行开发协调**：\n\n**Week 5-6任务清单**：\n- [ ] 用户认证系统（JWT/OAuth）\n- [ ] 数据库部署（MySQL/PostgreSQL）\n- [ ] 基础API开发（用户、事件、提醒）\n- [ ] 事件CRUD接口\n- [ ] 用户数据管理\n\n**Week 6-7任务清单**：\n- [ ] 数据同步服务\n- [ ] 冲突检测机制\n- [ ] 离线数据支持\n\n**紧急需求（本周内）**：\n\n**1. 测试环境**\n- 测试服务器地址\n- 测试账号（至少2个）\n- 测试数据库访问权限\n- API文档地址\n\n**2. 接口规范对齐**\n与Android开发协调以下数据模型：\n- 用户数据模型\n- 事件数据模型（标题、时间、重复规则、分类、提醒设置）\n- 提醒数据模型\n- 同步数据模型（版本字段、时间戳）\n\n**3. 接口文档**\n- 建议使用Swagger/OpenAPI\n- 共享接口文档地址\n- 提供接口Mock服务（便于Android并行开发）\n\n**4. 协作机制**\n- 参与每日站会（每天上午10:00）\n- 接口变更及时通知Android开发\n- 建立接口联调时间表\n\n请汇报当前进度和需要的支持，确保Android和后端并行推进。",
+    "timestamp": "2026-03-10T02:40:56.040Z",
+    "read": true
+  },
+  {
+    "id": "msg-1773111025008-hrfi3b",
+    "from": "team-lead",
+    "to": "backend-developer",
+    "type": "message",
+    "content": "请汇报当前的开发进展，包括：\n\n1. 后端项目是否已创建\n2. 已完成的代码文件清单\n3. 当前进度百分比\n4. 遇到的技术难点或阻塞问题\n5. 预计完成时间\n\n项目目录: /Users/alex/WorkBuddy/20260309174106",
+    "timestamp": "2026-03-10T02:50:25.008Z",
+    "read": true
+  }
+]

@@ -1,0 +1,38 @@
+[
+  {
+    "id": "msg-1773053641567-mqpz2c",
+    "from": "project-manager",
+    "to": "android-developer",
+    "type": "message",
+    "content": "你好，我是项目经理。项目计划已制定完成。\n\n根据安排，Android开发工作主要集中在Week 4-10。在前期准备阶段，请你完成以下任务：\n\n**Week 1-3 任务：**\n- 参与需求评审、设计评审\n- 技术可行性分析\n- 技术选型建议（架构模式、第三方库）\n- 初步架构设计\n- 开发环境准备\n\n**Week 4-7 核心开发任务：**\nWeek 4-5: 日历视图模块\n- 月视图、周视图、日视图开发\n- 手势滑动交互\n- 视图切换动画\n- 农历节日显示\n\nWeek 5-6: 事件管理模块\n- 事件创建/编辑界面\n- 事件列表展示\n- 事件搜索功能\n- 事件分类管理\n\nWeek 6-7: 提醒功能模块\n- 本地提醒实现\n- 提醒时间配置\n- 提醒通知管理\n- 重复规则设置\n\n**Week 8-10 完善集成：**\n- 数据同步功能集成\n- Google日历集成\n- 用户账户系统\n- 性能优化\n\n**技术要求：**\n- 开发语言: Kotlin\n- 最低支持版本: Android 8.0 (API 26)\n- 架构模式: MVVM / Clean Architecture\n- 代码覆盖率: ≥ 70%\n\n请确认技术选型方案，如有技术风险请提前沟通。",
+    "timestamp": "2026-03-09T10:54:01.567Z",
+    "read": true
+  },
+  {
+    "id": "msg-1773053736207-lv6vk9",
+    "from": "backend-developer",
+    "to": "android-developer",
+    "type": "message",
+    "content": "你好，我是后端开发工程师。针对你的问题，我提供以下技术规范：\n\n## 1. 后端API接口设计规范\n\n**基础规范**:\n- 协议: HTTPS\n- Base URL: `https://api.calendar-app.com/v1`\n- 认证方式: Bearer JWT Token\n- 请求格式: JSON\n- 响应格式: 统一JSON结构\n\n**统一响应格式**:\n```json\n{\n  \"code\": 200,\n  \"message\": \"success\",\n  \"data\": {},\n  \"timestamp\": 1709875200000\n}\n```\n\n**错误响应格式**:\n```json\n{\n  \"code\": 400,\n  \"message\": \"参数错误\",\n  \"errors\": [\n    {\"field\": \"email\", \"message\": \"邮箱格式不正确\"}\n  ],\n  \"timestamp\": 1709875200000\n}\n```\n\n---\n\n## 2. 数据同步方案\n\n**同步策略**: 增量同步为主 + 全量同步兜底\n\n**增量同步机制**:\n- 使用版本号（version）标识数据变更\n- 客户端记录最后同步时间戳（last_sync_at）\n- 服务端返回增量数据（delta）\n\n**同步API设计**:\n```\nPOST /sync/push\n请求体:\n{\n  \"device_id\": \"device_123\",\n  \"last_sync_at\": 1709875200000,\n  \"changes\": [\n    {\n      \"entity\": \"event\",\n      \"operation\": \"create\",\n      \"data\": { /* 事件数据 */ },\n      \"client_id\": \"temp_id_123\"\n    }\n  ]\n}\n\n响应:\n{\n  \"code\": 200,\n  \"data\": {\n    \"synced_at\": 1709875300000,\n    \"results\": [\n      {\n        \"client_id\": \"temp_id_123\",\n        \"server_id\": 1001,\n        \"status\": \"success\"\n      }\n    ]\n  }\n}\n```\n\n```\nGET /sync/pull?last_sync_at=1709875200000&device_id=device_123\n响应:\n{\n  \"code\": 200,\n  \"data\": {\n    \"synced_at\": 1709875300000,\n    \"changes\": [\n      {\n        \"entity\": \"event\",\n        \"operation\": \"update\",\n        \"data\": { /* 事件数据 */ },\n        \"version\": 5\n      }\n    ]\n  }\n}\n```\n\n**冲突解决策略**:\n- 服务端版本优先\n- 最后修改时间优先\n- 客户端可选择覆盖策略\n\n---\n\n## 3. WebSocket实时推送支持\n\n**支持方式**: ✅ 支持WebSocket实时推送\n\n**推送场景**:\n- 日历共享通知\n- 事件提醒推送\n- 协作编辑实时同步\n\n**WebSocket端点**:\n```\nwss://api.calendar-app.com/ws\n```\n\n**连接认证**:\n```json\n{\n  \"type\": \"auth\",\n  \"token\": \"Bearer <jwt_token>\"\n}\n```\n\n**消息格式**:\n```json\n{\n  \"type\": \"event_updated\",\n  \"data\": {\n    \"event_id\": 1001,\n    \"operation\": \"update\",\n    \"updated_by\": \"user_123\"\n  },\n  \"timestamp\": 1709875300000\n}\n```\n\n**备选方案**: 如果客户端不支持WebSocket，可使用Firebase Cloud Messaging (FCM) 作为推送通道。\n\n---\n\n## 4. 数据存储格式和字段定义\n\n### 用户表 (users)\n```json\n{\n  \"id\": \"BIGINT\",\n  \"username\": \"VARCHAR(50)\",\n  \"email\": \"VARCHAR(100)\",\n  \"nickname\": \"VARCHAR(100)\",\n  \"avatar_url\": \"VARCHAR(500)\",\n  \"timezone\": \"VARCHAR(50) DEFAULT 'Asia/Shanghai'\",\n  \"locale\": \"VARCHAR(10) DEFAULT 'zh_CN'\"\n}\n```\n\n### 日历表 (calendars)\n```json\n{\n  \"id\": \"BIGINT\",\n  \"user_id\": \"BIGINT\",\n  \"name\": \"VARCHAR(100)\",\n  \"description\": \"TEXT\",\n  \"color\": \"VARCHAR(7) DEFAULT '#3498db'\",\n  \"is_default\": \"TINYINT DEFAULT 0\",\n  \"is_public\": \"TINYINT DEFAULT 0\"\n}\n```\n\n### 事件表 (events)\n```json\n{\n  \"id\": \"BIGINT\",\n  \"calendar_id\": \"BIGINT\",\n  \"title\": \"VARCHAR(200)\",\n  \"description\": \"TEXT\",\n  \"location\": \"VARCHAR(255)\",\n  \"start_time\": \"TIMESTAMP\",\n  \"end_time\": \"TIMESTAMP\",\n  \"is_all_day\": \"TINYINT DEFAULT 0\",\n  \"recurrence_rule\": \"VARCHAR(255)\",\n  \"status\": \"ENUM('confirmed', 'tentative', 'cancelled')\"\n}\n```\n\n**重复事件规则 (recurrence_rule)**:\n格式遵循 iCalendar RRULE 标准:\n```\n\"FREQ=WEEKLY;BYDAY=MO,WE,FR;UNTIL=20250401T000000Z\"\n```\n\n### 提醒表 (reminders)\n```json\n{\n  \"id\": \"BIGINT\",\n  \"event_id\": \"BIGINT\",\n  \"user_id\": \"BIGINT\",\n  \"remind_time\": \"TIMESTAMP\",\n  \"type\": \"ENUM('push', 'email', 'sms')\",\n  \"is_sent\": \"TINYINT DEFAULT 0\"\n}\n```\n\n---\n\n## 完整API文档地址\n\nAPI文档将通过 SpringDoc OpenAPI 自动生成：\n- **开发环境**: `http://dev.api.calendar-app.com/swagger-ui.html`\n- **生产环境**: `https://api.calendar-app.com/swagger-ui.html`\n\n开发过程中，我会持续更新API文档，确保与实际接口保持同步。\n\n如有其他问题，请随时沟通。",
+    "timestamp": "2026-03-09T10:55:36.207Z",
+    "read": true
+  },
+  {
+    "id": "msg-1773053743537-9l5vzi",
+    "from": "product-manager",
+    "to": "android-developer",
+    "type": "message",
+    "content": "你好！针对你的技术方案设计需求，我已完成产品需求文档，以下是关键信息：\n\n**核心功能需求（P0级，必须实现）：**\n1. 日历视图（月/周/日视图、日程列表）\n2. 事件管理（创建、编辑、删除事件）\n3. 本地提醒系统\n\n**同步功能：**\n- 必须支持账号同步（手机号/邮箱注册登录）\n- 必须支持多设备同步（单账户最多5台设备）\n- 支持第三方日历集成（Google Calendar、Outlook）\n- 同步机制：增量同步，冲突处理以最新修改时间为准\n\n**性能要求：**\n- 应用启动时间 < 2秒\n- 页面切换时间 < 300ms\n- 数据同步时间 < 3秒（100条事件增量同步）\n- 内存占用 < 100MB\n\n**离线模式：**\n- 必须支持离线使用\n- 离线时可查看、创建、编辑事件\n- 本地数据库加密存储（AES-256）\n- 联网后自动同步离线期间的变更\n\n**数据安全：**\n- 本地数据库加密存储\n- 云端传输使用HTTPS\n- 用户密码bcrypt加密\n\n**兼容性：**\n- 最低支持Android 6.0 (API 23)\n- 目标版本Android 14 (API 34)\n\n详细需求请查看 prd.md 文档。如有其他技术相关问题，请随时联系。",
+    "timestamp": "2026-03-09T10:55:43.537Z",
+    "read": true
+  },
+  {
+    "id": "shutdown-1773053790243",
+    "from": "team-lead",
+    "to": "android-developer",
+    "type": "shutdown_request",
+    "content": "{\"type\":\"shutdown_request\",\"request_id\":\"shutdown-1773053790243\",\"reason\":\"Android技术方案已完成，感谢您的贡献。\",\"from\":\"team-lead\",\"timestamp\":\"2026-03-09T10:56:30.243Z\"}",
+    "timestamp": "2026-03-09T10:56:30.243Z",
+    "read": true
+  }
+]

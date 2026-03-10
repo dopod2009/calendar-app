@@ -1,0 +1,56 @@
+# Gradle files
+.gradle/
+build/
+local.properties
+
+# Android Studio files
+.idea/
+*.iml
+.DS_Store
+
+# APK files
+*.apk
+*.ap_
+*.aab
+
+# Keystore files (重要：不要提交签名密钥！)
+keystore/*.jks
+keystore/*.keystore
+keystore/keystore-base64.txt
+
+# Local configuration
+local.properties
+secrets.properties
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Log files
+*.log
+
+# Build outputs
+app/build/
+*/build/
+out/
+
+# NDK
+obj/
+
+# Kotlin
+*.class
+
+# Test results
+test-results/
+test-reports/
+
+# Temporary files
+*.swp
+*.swo
+*~
+.tmp/

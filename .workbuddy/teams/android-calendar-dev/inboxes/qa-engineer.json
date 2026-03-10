@@ -1,0 +1,38 @@
+[
+  {
+    "id": "msg-1773053641884-bo2al1",
+    "from": "project-manager",
+    "to": "qa-engineer",
+    "type": "message",
+    "content": "你好，我是项目经理。项目计划已制定完成。\n\n根据安排，测试工作贯穿整个项目周期。请按照以下任务开展工作：\n\n**Week 1-3 测试准备阶段：**\n- 参与需求评审、设计评审\n- 编写测试计划\n- 设计测试用例（功能测试、性能测试、兼容性测试）\n- 准备测试环境\n- 搭建自动化测试框架\n\n**Week 3 交付物：**\n- 测试计划文档\n- 测试用例初稿\n- 测试环境部署完成\n\n**Week 4-7 开发阶段：**\n- 功能测试执行（跟进开发进度）\n- Bug跟踪管理\n- 回归测试\n- 编写测试日报/周报\n\n**Week 8-10 集成测试阶段：**\n- 集成测试\n- 兼容性测试（Android 8.0+，主流品牌机型）\n- 性能测试（启动时间、内存占用、流畅度）\n- 安全测试（OWASP移动安全检查）\n\n**Week 11-12 发布阶段：**\n- 全面回归测试\n- 用户验收测试（UAT）\n- 性能压力测试\n- 编写测试报告\n- Bug修复验证\n\n**测试覆盖率要求：**\n- 功能测试: 100%\n- 兼容性测试: 覆盖Top 20主流机型\n- 性能测试: 启动时间 < 2秒，内存占用 < 100MB\n- 自动化测试: 核心功能自动化覆盖 ≥ 60%\n\n**测试工具建议：**\n- 功能测试: 手工测试 + 自动化测试\n- 自动化框架: Espresso + Appium\n- 性能测试: Android Profiler + PerfDog\n- 兼容性测试: 云测平台（Testin/MTC）\n- Bug管理: Jira\n\n请确认测试计划，如需资源支持请提前沟通。",
+    "timestamp": "2026-03-09T10:54:01.884Z",
+    "read": true
+  },
+  {
+    "id": "msg-1773053666152-bh8mef",
+    "from": "team-lead",
+    "to": "qa-engineer",
+    "type": "message",
+    "content": "请尽快完成测试用例文档，开发团队已完成架构设计，需要您的测试方案来保障质量。",
+    "timestamp": "2026-03-09T10:54:26.152Z",
+    "read": true
+  },
+  {
+    "id": "msg-1773053774818-mshbi7",
+    "from": "project-manager",
+    "to": "qa-engineer",
+    "type": "message",
+    "content": "Android开发提出了技术测试需求，请在测试计划和测试用例设计中增加以下内容：\n\n**测试计划补充（Week 3）：**\n\n1. **兼容性测试专项**\n   - Android 13+通知权限测试\n   - 主流机型兼容性测试（Top 20）\n   - 不同Android版本的权限适配测试\n\n2. **农历算法测试**\n   - 农历节日显示准确性测试\n   - 边界日期测试（跨年、闰月）\n   - 节气、假日识别测试\n\n3. **数据同步测试**\n   - 多设备同步场景测试\n   - 同步冲突测试用例\n   - 离线同步测试\n\n4. **第三方集成测试**\n   - Google Calendar集成测试\n   - OAuth授权流程测试\n   - 多账号场景测试\n\n**测试环境准备（Week 3）：**\n- 准备Android 13+测试设备\n- 配置Google Calendar测试账号\n- 搭建多设备同步测试环境\n\n**性能测试指标补充：**\n- 数据同步响应时间 < 3秒\n- 农历计算响应时间 < 100ms\n- 通知提醒准时率 ≥ 99%\n\n请在测试计划和测试用例中增加这些专项测试内容，确保测试覆盖所有技术风险点。",
+    "timestamp": "2026-03-09T10:56:14.818Z",
+    "read": true
+  },
+  {
+    "id": "shutdown-1773053790227",
+    "from": "team-lead",
+    "to": "qa-engineer",
+    "type": "shutdown_request",
+    "content": "{\"type\":\"shutdown_request\",\"request_id\":\"shutdown-1773053790227\",\"reason\":\"测试计划与测试用例文档已完成，感谢您的贡献。\",\"from\":\"team-lead\",\"timestamp\":\"2026-03-09T10:56:30.227Z\"}",
+    "timestamp": "2026-03-09T10:56:30.227Z",
+    "read": true
+  }
+]

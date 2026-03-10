@@ -1,0 +1,23 @@
+{
+  "name": "android-calendar-dev",
+  "leadAgentId": "070fa4e02c1543ca8b87d09aedf5d93c",
+  "workspacePath": "/Users/alex/WorkBuddy/20260309174106",
+  "createdAt": "2026-03-09T10:50:35.906Z",
+  "options": {
+    "workspacePath": "/Users/alex/WorkBuddy/20260309174106",
+    "isAutoTeam": false
+  },
+  "members": [
+    {
+      "memberId": "team-lead@android-calendar-dev",
+      "name": "team-lead",
+      "role": "Team Lead - coordinates the team and interacts with the user"
+    },
+    {
+      "memberId": "qa-engineer@android-calendar-dev",
+      "name": "qa-engineer",
+      "role": "测试工程师 - 测试用例"
+    }
+  ],
+  "isAutoTeam": false
+}

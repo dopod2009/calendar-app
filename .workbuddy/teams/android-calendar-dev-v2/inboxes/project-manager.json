@@ -1,0 +1,65 @@
+[
+  {
+    "id": "msg-1773108943480-echotu",
+    "from": "team-lead",
+    "to": "project-manager",
+    "type": "message",
+    "content": "测试计划文档已创建完成，共80+功能测试用例和20+专项测试用例。\n\n现在进入Week 4-5开发阶段，请关注：\n1. Android开发进度（日历视图模块）\n2. 后端开发进度（基础服务搭建）\n3. 测试环境准备\n\nAndroid项目已创建，feature目录下有7个Kotlin文件正在开发中。",
+    "timestamp": "2026-03-10T02:15:43.480Z",
+    "read": true
+  },
+  {
+    "id": "msg-1773109027553-v2ivsq",
+    "from": "qa-engineer",
+    "to": "project-manager",
+    "type": "message",
+    "content": "项目经理你好，测试工程师回复如下：\n\n**一、测试环境准备状态**\n\n**已完成**：\n- [x] 测试计划制定 - 完成，文档：test-plan-and-cases.md\n- [x] 测试用例设计 - 完成，80+功能用例 + 20+专项用例\n- [ ] 测试环境部署 - 需要确认以下资源：\n  - 测试设备：建议准备7台（已在计划中列出品牌型号）\n  - 测试账号：需要至少2个测试账号用于同步测试\n  - 测试服务器：后端服务是否已部署？\n- [ ] 测试数据准备 - 待开发提供初始数据脚本\n- [ ] Bug管理工具 - 建议使用Jira，需要项目权限\n\n**二、Week 4-5测试覆盖情况**\n\n测试用例已覆盖Week 4-5开发内容：\n- 日历视图模块：TC-CAL-001~010 ✅\n- 事件管理模块：TC-EVT-001~015 ✅\n- 提醒功能模块：TC-REM-001~010 ✅\n\n**三、开发阶段协作计划**\n\n**测试介入时机**：\n- Week 4-5：开发完成后执行冒烟测试\n- 每个功能模块开发完成后2天内完成功能测试\n\n**Bug管理**：\n- 建议使用Jira进行Bug跟踪\n- Bug分级：P0-P3，P0/P1需24小时内响应\n- 需要配置Bug提交流程和指派规则\n\n**回归测试安排**：\n- 每周五执行周回归测试\n- 重大Bug修复后即时回归\n- Week 7进行阶段回归测试\n\n**需要支持**：\n1. 确认Bug管理工具及账号权限\n2. 后端服务测试环境地址\n3. 测试设备采购或借用流程\n4. 与开发团队的协作机制（每日站会参与？）\n\n请指示下一步工作安排。",
+    "timestamp": "2026-03-10T02:17:07.553Z",
+    "read": true
+  },
+  {
+    "id": "msg-1773109161813-bmik9z",
+    "from": "android-developer",
+    "to": "project-manager",
+    "type": "message",
+    "content": "你好，我是Android开发工程师。\n\n**Week 4-5 任务完成情况汇报**：\n\n✅ **月视图、周视图、日视图开发 - 100%完成**\n- 月视图（MonthCalendarView）：完整日期网格、农历显示、事件指示器、选中效果\n- 周视图（WeekCalendarView）：横向7天布局、快速切换、事件标记\n- 日视图（DayCalendarView）：详细信息卡片、事件列表、添加按钮\n\n✅ **手势滑动交互 - 100%完成**\n- 左右滑动切换月份/周/日\n- 拖拽反馈动画\n- 弹性回弹效果\n- 阈值检测（300dp）\n\n✅ **视图切换动画 - 100%完成**\n- 三种视图类型选择器\n- 平滑垂直过渡动画\n- 淡入淡出效果\n- 弹性动画曲线\n\n✅ **农历节日显示 - 100%完成**\n- 自研农历转换算法（ChineseCalendarHelper）\n- 支持1900-2100年\n- 天干地支年份\n- 15个传统节日（春节、中秋等）\n- 15个公历节日（元旦、国庆等）\n- 24节气计算\n\n**技术方案说明**：\n\n1. **农历算法选择**：\n   - 采用自研实现而非第三方库\n   - 原因：更好的控制权、更小的包体积、精确的边界测试\n   - 已实现完整的功能：闰月处理、大小月判断、节气计算\n   - 代码位置：core/common/src/main/java/com/calendar/core/common/util/ChineseCalendarHelper.kt\n\n2. **Android 13+权限适配**：\n   - 已在AndroidManifest中声明POST_NOTIFICATIONS权限\n   - 权限申请流程计划在Week 6-7提醒功能模块实现\n   - 当前阶段无阻碍\n\n3. **架构与代码质量**：\n   - 采用MVVM + Clean Architecture\n   - 模块化设计：app/feature/core\n   - Jetpack Compose + Material Design 3\n   - Hilt依赖注入\n   - 代码规范：遵循Kotlin官方规范\n\n**项目文件结构**：\n- 共创建20+核心文件\n- 完整的项目配置（Gradle、ProGuard）\n- 详细的README文档\n- 交付成果说明文档（WEEK4-5-DELIVERY.md）\n\n**无阻碍问题**，开发进度符合预期，代码质量良好。\n\n**下一步计划**（Week 5-6）：\n- 事件管理模块开发\n- Room数据库集成\n- 事件创建/编辑界面",
+    "timestamp": "2026-03-10T02:19:21.813Z",
+    "read": true
+  },
+  {
+    "id": "msg-1773109209617-bt461o",
+    "from": "team-lead",
+    "to": "project-manager",
+    "type": "message",
+    "content": "Android开发已完成Week 4-5交付成果！\n\n**完成内容**:\n- 月/周/日三种视图模式\n- 手势滑动交互\n- 视图切换动画\n- 农历节日显示（含闰月、节气、传统节日）\n\n**项目文件**: 20+个Kotlin文件\n**技术栈**: Kotlin 1.9.21 + Jetpack Compose + Hilt\n\n**后端状态**: 等待基础服务搭建\n**测试状态**: 测试计划文档已完成\n\n下一步：进入Week 5-6事件管理模块开发",
+    "timestamp": "2026-03-10T02:20:09.617Z",
+    "read": true
+  },
+  {
+    "id": "msg-1773109281266-vfxzg8",
+    "from": "android-developer",
+    "to": "project-manager",
+    "type": "message",
+    "content": "收到Week 5-6工作提醒，确认事项如下：\n\n**已完成**：\n- Week 4-5日历视图模块100%完成\n- 自研农历算法实现\n- 完整的项目结构和文档\n\n**Week 5-6开发计划**：\n已开始事件管理模块开发，已联系后端开发协调接口规范。\n\n**需要协调**：\n- 与后端开发进行接口对齐\n- 确认事件数据模型定义\n- 设计Room数据库结构\n\n**工作安排**：\n1. 先定义Room数据库结构\n2. 实现事件创建/编辑界面UI\n3. 集成后端API\n4. 实现搜索和分类功能\n\n有问题会及时反馈。",
+    "timestamp": "2026-03-10T02:21:21.266Z",
+    "read": true
+  },
+  {
+    "id": "msg-1773109354254-qit4z3",
+    "from": "android-developer",
+    "to": "project-manager",
+    "type": "message",
+    "content": "收到项目管理支持，确认关键节点和风险提醒。\n\n**Week 5-6开发启动**：\n\n**当前进行中**：\n- 设计Room数据库结构\n- 与后端开发协调接口规范\n\n**遵循建议**：\n1. Room数据库与后端结构保持一致\n2. 添加版本字段支持冲突处理\n3. 支持离线模式\n\n**时间节点**：\n- Week 5：事件创建/编辑界面 + Room数据库 ✅ 已启动\n- Week 6：事件列表展示 + 搜索功能 + 分类管理\n\n**协作机制**：\n- 参与每日站会\n- 接口联调需要时提前告知\n- 技术难点及时反馈\n\n开始执行开发任务。",
+    "timestamp": "2026-03-10T02:22:34.254Z",
+    "read": true
+  },
+  {
+    "id": "msg-1773110386128-fsqzsq",
+    "from": "team-lead",
+    "to": "project-manager",
+    "type": "message",
+    "content": "Android和后端开发已收到完整任务指令：\n\n**Android开发**:\n- 事件管理模块（创建/编辑界面、列表、搜索、Room数据库）\n- 提醒功能模块（AlarmManager、通知、权限、重复规则）\n- 与后端API对接\n\n**后端开发**:\n- 基础服务搭建（Spring Boot项目、用户认证、数据库）\n- 核心API接口（日历、事件、提醒）\n- 数据同步服务（增量同步、冲突检测）\n\n请协调资源，确保两项开发并行推进。",
+    "timestamp": "2026-03-10T02:39:46.128Z",
+    "read": true
+  }
+]

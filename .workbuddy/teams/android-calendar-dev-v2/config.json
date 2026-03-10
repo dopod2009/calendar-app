@@ -1,0 +1,48 @@
+{
+  "name": "android-calendar-dev-v2",
+  "leadAgentId": "070fa4e02c1543ca8b87d09aedf5d93c",
+  "workspacePath": "/Users/alex/WorkBuddy/20260309174106",
+  "createdAt": "2026-03-10T01:59:41.295Z",
+  "options": {
+    "workspacePath": "/Users/alex/WorkBuddy/20260309174106",
+    "isAutoTeam": false
+  },
+  "members": [
+    {
+      "memberId": "team-lead@android-calendar-dev-v2",
+      "name": "team-lead",
+      "role": "Team Lead - coordinates the team and interacts with the user"
+    },
+    {
+      "memberId": "product-manager@android-calendar-dev-v2",
+      "name": "product-manager",
+      "role": "产品经理 - 继续工作"
+    },
+    {
+      "memberId": "project-manager@android-calendar-dev-v2",
+      "name": "project-manager",
+      "role": "项目经理 - 继续工作"
+    },
+    {
+      "memberId": "ui-designer@android-calendar-dev-v2",
+      "name": "ui-designer",
+      "role": "UI设计师 - 继续工作"
+    },
+    {
+      "memberId": "qa-engineer@android-calendar-dev-v2",
+      "name": "qa-engineer",
+      "role": "测试工程师 - 继续工作"
+    },
+    {
+      "memberId": "android-developer@android-calendar-dev-v2",
+      "name": "android-developer",
+      "role": "终端开发 - 继续工作"
+    },
+    {
+      "memberId": "backend-developer@android-calendar-dev-v2",
+      "name": "backend-developer",
+      "role": "云端开发 - 继续工作"
+    }
+  ],
+  "isAutoTeam": false
+}
