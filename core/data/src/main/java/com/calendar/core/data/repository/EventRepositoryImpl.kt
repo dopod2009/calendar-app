@@ -2,173 +2,103 @@ package com.calendar.core.data.repository
 
 import com.calendar.core.data.model.EventDao
 import com.calendar.core.data.model.EventEntity
-import com.calendar.core.data.model.toDomain
-import com.calendar.core.data.model.toEntity
 import com.calendar.core.domain.model.CalendarEvent
-import com.calendar.core.network.api.EventApi
-import com.calendar.core.network.dto.CreateEventRequest
-import com.calendar.core.network.dto.UpdateEventRequest
-import com.calendar.core.network.dto.toEntity
+import com.calendar.core.domain.repository.EventRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
-import java.time.LocalDateTime
-import java.time.format.DateTimeFormatter
+import java.time.LocalDate
 import javax.inject.Inject
 import javax.inject.Singleton
 
 /**
- * 事件Repository实现 - 支持本地+远程数据源
+ * 事件Repository实现
  */
 @Singleton
 class EventRepositoryImpl @Inject constructor(
-    private val eventDao: EventDao,
-    private val eventApi: EventApi
-) : com.calendar.core.domain.repository.EventRepository {
+    private val eventDao: EventDao
+) : EventRepository {
 
-    /**
-     * 获取所有事件（本地优先）
-     */
-    override fun getAllEvents(): Flow<List<CalendarEvent>> {
-        return eventDao.getAllEvents().map { entities ->
-            entities.map { it.toDomain() }
+    override suspend fun insert(event: CalendarEvent): Long {
+        return eventDao.insert(EventEntity.fromDomainModel(event))
+    }
+
+    override suspend fun update(event: CalendarEvent) {
+        eventDao.update(EventEntity.fromDomainModel(event))
+    }
+
+    override suspend fun delete(event: CalendarEvent) {
+        eventDao.delete(EventEntity.fromDomainModel(event))
+    }
+
+    override suspend fun softDelete(eventId: Long) {
+        eventDao.softDelete(eventId)
+    }
+
+    override suspend fun getById(eventId: Long): CalendarEvent? {
+        return eventDao.getById(eventId)?.toDomainModel()
+    }
+
+    override fun getByIdFlow(eventId: Long): Flow<CalendarEvent?> {
+        return eventDao.getByIdFlow(eventId).map { it?.toDomainModel() }
+    }
+
+    override suspend fun getByDate(date: LocalDate): List<CalendarEvent> {
+        return eventDao.getByDate(date.toEpochDay()).map { it.toDomainModel() }
+    }
+
+    override fun getByDateFlow(date: LocalDate): Flow<List<CalendarEvent>> {
+        return eventDao.getByDateFlow(date.toEpochDay()).map { entities ->
+            entities.map { it.toDomainModel() }
         }
     }
 
-    /**
-     * 根据日期获取事件
-     */
-    override fun getEventsByDate(date: LocalDateTime): Flow<List<CalendarEvent>> {
-        val startOfDay = date.toLocalDate().atStartOfDay()
-        val endOfDay = startOfDay.plusDays(1)
-        
-        return eventDao.getEventsBetween(startOfDay, endOfDay).map { entities ->
-            entities.map { it.toDomain() }
+    override suspend fun getByDateRange(startDate: LocalDate, endDate: LocalDate): List<CalendarEvent> {
+        return eventDao.getByDateRange(startDate.toEpochDay(), endDate.toEpochDay()).map { it.toDomainModel() }
+    }
+
+    override fun getByDateRangeFlow(startDate: LocalDate, endDate: LocalDate): Flow<List<CalendarEvent>> {
+        return eventDao.getByDateRangeFlow(startDate.toEpochDay(), endDate.toEpochDay()).map { entities ->
+            entities.map { it.toDomainModel() }
         }
     }
 
-    /**
-     * 搜索事件
-     */
-    override fun searchEvents(query: String): Flow<List<CalendarEvent>> {
-        return eventDao.searchEvents(query).map { entities ->
-            entities.map { it.toDomain() }
+    override suspend fun search(keyword: String): List<CalendarEvent> {
+        return eventDao.search(keyword).map { it.toDomainModel() }
+    }
+
+    override fun searchFlow(keyword: String): Flow<List<CalendarEvent>> {
+        return eventDao.searchFlow(keyword).map { entities ->
+            entities.map { it.toDomainModel() }
         }
     }
 
-    /**
-     * 添加事件（本地+远程）
-     */
-    override suspend fun addEvent(event: CalendarEvent): Result<CalendarEvent> {
-        return try {
-            // 1. 保存到本地数据库
-            val entity = event.toEntity()
-            val id = eventDao.insert(entity)
-            
-            // 2. 同步到远程服务器
-            try {
-                val request = CreateEventRequest(
-                    title = event.title,
-                    description = event.description,
-                    location = event.location,
-                    startTime = event.startTime.toString(),
-                    endTime = event.endTime.toString(),
-                    allDay = event.allDay,
-                    category = event.category,
-                    color = event.color,
-                    reminderEnabled = event.reminderEnabled,
-                    reminderMinutes = event.reminderMinutes
-                )
-                
-                val response = eventApi.createEvent(request)
-                if (response.isSuccessful && response.body()?.success == true) {
-                    val remoteEvent = response.body()?.data!!
-                    // 更新本地数据库的远程ID
-                    eventDao.update(entity.copy(
-                        id = id,
-                        eventId = remoteEvent.eventId ?: "",
-                        syncStatus = "SYNCED"
-                    ))
-                }
-            } catch (e: Exception) {
-                // 远程同步失败，标记为待同步
-                eventDao.update(entity.copy(
-                    id = id,
-                    syncStatus = "PENDING"
-                ))
-            }
-            
-            Result.success(event.copy(id = id))
-        } catch (e: Exception) {
-            Result.failure(e)
+    override fun getAllFlow(): Flow<List<CalendarEvent>> {
+        return eventDao.getAllFlow().map { entities ->
+            entities.map { it.toDomainModel() }
         }
     }
 
-    /**
-     * 更新事件
-     */
-    override suspend fun updateEvent(event: CalendarEvent): Result<CalendarEvent> {
-        return try {
-            val entity = event.toEntity().copy(
-                sequence = (event.sequence ?: 0) + 1,
-                syncStatus = "PENDING"
-            )
-            eventDao.update(entity)
-            
-            // 尝试远程同步
-            try {
-                val request = UpdateEventRequest(
-                    title = event.title,
-                    description = event.description,
-                    location = event.location,
-                    startTime = event.startTime.toString(),
-                    endTime = event.endTime.toString(),
-                    allDay = event.allDay,
-                    category = event.category,
-                    color = event.color,
-                    reminderEnabled = event.reminderEnabled,
-                    reminderMinutes = event.reminderMinutes
-                )
-                
-                event.id?.let { id ->
-                    val response = eventApi.updateEvent(id, request)
-                    if (response.isSuccessful && response.body()?.success == true) {
-                        eventDao.update(entity.copy(syncStatus = "SYNCED"))
-                    }
-                }
-            } catch (e: Exception) {
-                // 远程同步失败，保持PENDING状态
-            }
-            
-            Result.success(event)
-        } catch (e: Exception) {
-            Result.failure(e)
-        }
+    override suspend fun getPendingSync(): List<CalendarEvent> {
+        return eventDao.getPendingSync().map { it.toDomainModel() }
     }
 
-    /**
-     * 删除事件
-     */
-    override suspend fun deleteEvent(eventId: Long): Result<Unit> {
-        return try {
-            eventDao.deleteById(eventId)
-            
-            // 远程删除
-            try {
-                eventApi.deleteEvent(eventId)
-            } catch (e: Exception) {
-                // 忽略远程删除失败
-            }
-            
-            Result.success(Unit)
-        } catch (e: Exception) {
-            Result.failure(e)
-        }
+    override suspend fun getConflicts(): List<CalendarEvent> {
+        return eventDao.getConflicts().map { it.toDomainModel() }
     }
 
-    /**
-     * 根据ID获取事件
-     */
-    override suspend fun getEventById(id: Long): CalendarEvent? {
-        return eventDao.getEventById(id)?.toDomain()
+    override suspend fun updateSyncStatus(eventId: Long, isSynced: Boolean) {
+        val status = if (isSynced) com.calendar.core.data.model.SyncStatus.SYNCED 
+                     else com.calendar.core.data.model.SyncStatus.PENDING
+        eventDao.updateSyncStatus(eventId, status)
+    }
+
+    override suspend fun getDatesWithEvents(startDate: LocalDate, endDate: LocalDate): Set<LocalDate> {
+        return eventDao.getDatesWithEvents(startDate.toEpochDay(), endDate.toEpochDay())
+            .map { LocalDate.ofEpochDay(it) }
+            .toSet()
+    }
+
+    override suspend fun getCountByDate(date: LocalDate): Int {
+        return eventDao.getCountByDate(date.toEpochDay())
     }
 }

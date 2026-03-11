@@ -50,6 +50,9 @@ dependencies {
     // Coroutines
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.3")
     
+    // Retrofit (for network DTOs)
+    implementation("com.squareup.retrofit2:retrofit:2.9.0")
+    
     // Testing
     testImplementation("junit:junit:4.13.2")
 }
