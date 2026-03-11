@@ -38,13 +38,24 @@ jobs:
     - name: Grant execute permission for gradlew
       run: chmod +x gradlew
       
-    # 5. 创建签名密钥文件
+    # 5. 生成Gradle Wrapper（如果缺少）
+    - name: Generate Gradle Wrapper
+      run: |
+        if [ ! -f gradle/wrapper/gradle-wrapper.jar ]; then
+          echo "Gradle Wrapper JAR not found, generating..."
+          curl -L https://services.gradle.org/distributions/gradle-8.4-bin.zip -o gradle.zip
+          unzip -q gradle.zip
+          gradle-8.4/bin/gradle wrapper --gradle-version 8.4
+          rm -rf gradle-8.4 gradle.zip
+        fi
+      
+    # 6. 创建签名密钥文件
     - name: Create keystore
       run: |
         mkdir -p keystore
         echo "${{ secrets.KEYSTORE_BASE64 }}" | base64 --decode > keystore/calendar-release.jks
       
-    # 6. 创建keystore.properties
+    # 7. 创建keystore.properties
     - name: Create keystore.properties
       run: |
         cat > keystore/keystore.properties << EOF
@@ -54,29 +65,29 @@ jobs:
         storeFile=calendar-release.jks
         EOF
       
-    # 7. 创建local.properties
+    # 8. 创建local.properties
     - name: Create local.properties
       run: |
         echo "sdk.dir=$ANDROID_HOME" > local.properties
       
-    # 8. 构建Release APK
+    # 9. 构建Release APK
     - name: Build Release APK
       run: ./gradlew assembleRelease --stacktrace
       
-    # 9. 签名APK（如果使用apksigner）
+    # 10. 签名APK（如果使用apksigner）
     - name: Sign APK
       if: success()
       run: |
         # APK已经通过Gradle配置自动签名，此步骤可选
         echo "APK signed successfully"
       
-    # 10. 重命名APK文件
+    # 11. 重命名APK文件
     - name: Rename APK
       run: |
         mv app/build/outputs/apk/release/app-release.apk \
            app/build/outputs/apk/release/calendar-app-v1.0.0-alpha.apk
       
-    # 11. 上传APK作为构建产物
+    # 12. 上传APK作为构建产物
     - name: Upload APK as Artifact
       uses: actions/upload-artifact@v4
       with:
@@ -84,7 +95,7 @@ jobs:
         path: app/build/outputs/apk/release/calendar-app-v1.0.0-alpha.apk
         retention-days: 30
         
-    # 12. 生成构建报告
+    # 13. 生成构建报告
     - name: Generate Build Report
       if: always()
       run: |
