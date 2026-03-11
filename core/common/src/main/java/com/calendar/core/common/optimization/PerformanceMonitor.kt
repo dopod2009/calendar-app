@@ -50,7 +50,8 @@ object PerformanceMonitor {
     /**
      * 记录性能日志
      */
-    private fun logPerformance(tag: String, operation: String, duration: Long) {
+    @PublishedApi
+    internal fun logPerformance(tag: String, operation: String, duration: Long) {
         val logEntry = "$tag/$operation"
 
         // 缓存性能数据
@@ -103,7 +104,7 @@ object PerformanceMonitor {
             try {
                 val report = StringBuilder()
                 report.appendLine("Performance Report - ${SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault()).format(Date())}")
-                report.appendLine("=" * 50)
+                report.appendLine("=".repeat(50))
                 report.appendLine()
 
                 getPerformanceReport().forEach { (operation, stats) ->

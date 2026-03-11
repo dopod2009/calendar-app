@@ -95,6 +95,13 @@ android {
 }
 
 dependencies {
+    // Modules
+    implementation(project(":feature:calendar"))
+    implementation(project(":feature:event"))
+    implementation(project(":core:common"))
+    implementation(project(":core:domain"))
+    implementation(project(":core:data"))
+
     // Core
     implementation("androidx.core:core-ktx:1.12.0")
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.7.0")
