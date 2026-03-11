@@ -21,6 +21,10 @@ import retrofit2.converter.moshi.MoshiConverterFactory
 import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
 
+/**
+ * 网络依赖注入模块
+ * 注：目前网络功能为离线模式，此模块仅提供基础配置
+ */
 @Module
 @InstallIn(SingletonComponent::class)
 object NetworkModule {

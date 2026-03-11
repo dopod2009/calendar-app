@@ -1,22 +1,19 @@
 package com.calendar.core.data.repository
 
 import com.calendar.core.data.model.EventDao
-import com.calendar.core.data.model.EventEntity
-import com.calendar.core.data.model.SyncStatus
 import com.calendar.core.domain.model.CalendarEvent
-import com.calendar.core.network.TokenManager
+import com.calendar.core.data.model.EventEntity
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import javax.inject.Inject
 import javax.inject.Singleton
 
 /**
- * 数据同步Repository（简化版）
+ * 数据同步Repository（简化版 - 本地模式）
  */
 @Singleton
 class SyncRepositoryImpl @Inject constructor(
-    private val eventDao: EventDao,
-    private val tokenManager: TokenManager
+    private val eventDao: EventDao
 ) {
 
     private val _syncState = MutableStateFlow<SyncState>(SyncState.Idle)
@@ -43,7 +40,7 @@ class SyncRepositoryImpl @Inject constructor(
                 SyncResult(
                     success = true,
                     syncedCount = pendingEvents.size,
-                    message = "同步成功"
+                    message = "同步成功（本地模式）"
                 )
             )
         } catch (e: Exception) {
