@@ -1,13 +1,13 @@
 package com.calendar.feature.calendar.components
 
 import androidx.compose.animation.core.animateColorAsState
+import androidx.compose.animation.core.tween
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Text
+import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -17,15 +17,19 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.calendar.app.ui.theme.EventIndicator
-import com.calendar.app.ui.theme.OtherMonthDay
-import com.calendar.app.ui.theme.SelectedDayBackground
-import com.calendar.app.ui.theme.TodayBackground
-import com.calendar.app.ui.theme.WeekendDay
-import com.calendar.core.domain.model.CalendarDay
-import com.calendar.feature.calendar.util.CalendarUtils
+import com.calendar.core.common.util.ChineseCalendarHelper
+import java.time.DayOfWeek
 import java.time.LocalDate
 import java.time.YearMonth
+import java.time.format.TextStyle
+import java.util.Locale
+
+// 本地颜色定义
+private val WeekendDay = Color(0xFFE57373)
+private val OtherMonthDay = Color(0xFFBDBDBD)
+private val SelectedDayBackground = Color(0xFF2196F3)
+private val TodayBackground = Color(0xFFE3F2FD)
+private val EventIndicator = Color(0xFF4CAF50)
 
 /**
  * 月视图日历组件
@@ -38,137 +42,186 @@ fun MonthCalendarView(
     modifier: Modifier = Modifier,
     eventDates: Set<LocalDate> = emptySet()
 ) {
-    val monthData = remember(yearMonth, eventDates) {
-        CalendarUtils.generateMonthData(yearMonth, selectedDate, eventDates)
-    }
-    val allDays = monthData.getAllDisplayDays()
-    
-    Column(modifier = modifier) {
-        // 星期标题栏
+    Column(modifier = modifier.fillMaxWidth()) {
+        // 星期标题行
         WeekDayHeader()
         
         // 日期网格
-        DateGrid(
-            days = allDays,
-            onDateSelected = onDateSelected
+        MonthGrid(
+            yearMonth = yearMonth,
+            selectedDate = selectedDate,
+            onDateSelected = onDateSelected,
+            eventDates = eventDates
         )
     }
 }
 
 /**
- * 星期标题栏
+ * 星期标题行
  */
 @Composable
 private fun WeekDayHeader() {
-    val weekDayNames = CalendarUtils.getWeekDayNames()
-    
     Row(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(vertical = 8.dp),
-        horizontalArrangement = Arrangement.SpaceEvenly
+            .padding(horizontal = 8.dp, vertical = 4.dp)
     ) {
-        weekDayNames.forEachIndexed { index, dayName ->
-            val isWeekend = index == 0 || index == 6
+        val weekDays = listOf(
+            DayOfWeek.SUNDAY,
+            DayOfWeek.MONDAY,
+            DayOfWeek.TUESDAY,
+            DayOfWeek.WEDNESDAY,
+            DayOfWeek.THURSDAY,
+            DayOfWeek.FRIDAY,
+            DayOfWeek.SATURDAY
+        )
+        
+        weekDays.forEach { dayOfWeek ->
             Text(
-                text = dayName,
-                style = MaterialTheme.typography.labelSmall,
-                color = if (isWeekend) WeekendDay else MaterialTheme.colorScheme.onSurface.copy(alpha = 0.6f),
+                text = dayOfWeek.getDisplayName(TextStyle.SHORT, Locale.CHINA),
                 modifier = Modifier.weight(1f),
-                textAlign = TextAlign.Center
+                textAlign = TextAlign.Center,
+                style = MaterialTheme.typography.bodySmall,
+                color = if (dayOfWeek == DayOfWeek.SUNDAY || dayOfWeek == DayOfWeek.SATURDAY) {
+                    WeekendDay
+                } else {
+                    MaterialTheme.colorScheme.onSurface.copy(alpha = 0.6f)
+                },
+                fontWeight = FontWeight.Medium
             )
         }
     }
 }
 
 /**
- * 日期网格
+ * 月历网格
  */
 @Composable
-private fun DateGrid(
-    days: List<CalendarDay>,
-    onDateSelected: (LocalDate) -> Unit
+private fun MonthGrid(
+    yearMonth: YearMonth,
+    selectedDate: LocalDate,
+    onDateSelected: (LocalDate) -> Unit,
+    eventDates: Set<LocalDate>
 ) {
-    val rows = days.chunked(7)
+    val today = LocalDate.now()
+    val firstDayOfMonth = yearMonth.atDay(1)
+    val lastDayOfMonth = yearMonth.atEndOfMonth()
+    
+    // 计算第一天是星期几（周日=0）
+    val firstDayOfWeek = firstDayOfMonth.dayOfWeek.value % 7
+    
+    // 计算需要显示的上个月的天数
+    val daysFromPreviousMonth = firstDayOfWeek
+    
+    // 计算总行数
+    val totalDays = daysFromPreviousMonth + yearMonth.lengthOfMonth()
+    val rows = kotlin.math.ceil(totalDays / 7.0).toInt()
     
     Column(
-        modifier = Modifier.fillMaxWidth(),
-        verticalArrangement = Arrangement.spacedBy(4.dp)
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(horizontal = 8.dp)
     ) {
-        rows.forEach { weekDays ->
-            DateRow(
-                days = weekDays,
-                onDateSelected = onDateSelected
-            )
+        for (row in 0 until rows) {
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .weight(1f)
+            ) {
+                for (col in 0 until 7) {
+                    val dayIndex = row * 7 + col
+                    val date = when {
+                        dayIndex < daysFromPreviousMonth -> {
+                            // 上个月的日期
+                            firstDayOfMonth.minusDays((daysFromPreviousMonth - dayIndex).toLong())
+                        }
+                        dayIndex < daysFromPreviousMonth + yearMonth.lengthOfMonth() -> {
+                            // 当前月的日期
+                            firstDayOfMonth.plusDays((dayIndex - daysFromPreviousMonth).toLong())
+                        }
+                        else -> {
+                            // 下个月的日期
+                            lastDayOfMonth.plusDays((dayIndex - daysFromPreviousMonth - yearMonth.lengthOfMonth() + 1).toLong())
+                        }
+                    }
+                    
+                    val isCurrentMonth = date.month == yearMonth.month
+                    val isToday = date == today
+                    val isSelected = date == selectedDate
+                    val hasEvent = date in eventDates
+                    val isWeekend = date.dayOfWeek == DayOfWeek.SUNDAY || date.dayOfWeek == DayOfWeek.SATURDAY
+                    
+                    DayCell(
+                        date = date,
+                        isCurrentMonth = isCurrentMonth,
+                        isToday = isToday,
+                        isSelected = isSelected,
+                        hasEvent = hasEvent,
+                        isWeekend = isWeekend,
+                        onClick = { onDateSelected(date) },
+                        modifier = Modifier
+                            .weight(1f)
+                            .aspectRatio(1f)
+                    )
+                }
+            }
         }
     }
 }
 
 /**
- * 日期行
- */
-@Composable
-private fun DateRow(
-    days: List<CalendarDay>,
-    onDateSelected: (LocalDate) -> Unit
-) {
-    Row(
-        modifier = Modifier.fillMaxWidth(),
-        horizontalArrangement = Arrangement.SpaceEvenly
-    ) {
-        days.forEach { day ->
-            DayCell(
-                day = day,
-                onClick = { onDateSelected(day.date) },
-                modifier = Modifier.weight(1f)
-            )
-        }
-    }
-}
-
-/**
- * 单个日期单元格
+ * 日期单元格
  */
 @Composable
 private fun DayCell(
-    day: CalendarDay,
+    date: LocalDate,
+    isCurrentMonth: Boolean,
+    isToday: Boolean,
+    isSelected: Boolean,
+    hasEvent: Boolean,
+    isWeekend: Boolean,
     onClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     val backgroundColor by animateColorAsState(
         targetValue = when {
-            day.isSelected -> SelectedDayBackground
-            day.isToday -> TodayBackground
+            isSelected -> SelectedDayBackground
+            isToday -> TodayBackground
             else -> Color.Transparent
         },
+        animationSpec = tween(200),
         label = "backgroundColor"
     )
     
-    val textColor by animateColorAsState(
-        targetValue = when {
-            day.isSelected -> MaterialTheme.colorScheme.onPrimary
-            !day.isCurrentMonth -> OtherMonthDay
-            day.isWeekend() -> WeekendDay
-            else -> MaterialTheme.colorScheme.onSurface
-        },
-        label = "textColor"
-    )
+    val textColor = when {
+        isSelected -> Color.White
+        !isCurrentMonth -> OtherMonthDay
+        isWeekend -> WeekendDay
+        else -> MaterialTheme.colorScheme.onSurface
+    }
     
-    val lunarTextColor by animateColorAsState(
-        targetValue = when {
-            day.isSelected -> MaterialTheme.colorScheme.onPrimary.copy(alpha = 0.8f)
-            !day.isCurrentMonth -> OtherMonthDay.copy(alpha = 0.6f)
-            day.isWeekend() -> WeekendDay.copy(alpha = 0.7f)
-            else -> MaterialTheme.colorScheme.onSurface.copy(alpha = 0.6f)
-        },
-        label = "lunarTextColor"
-    )
+    // 获取农历信息
+    val lunarDate = remember(date) { ChineseCalendarHelper.solarToLunar(date) }
+    val solarTerm = remember(date) { ChineseCalendarHelper.getSolarTerm(date) }
+    val festival = remember(date) {
+        ChineseCalendarHelper.getTraditionalFestival(lunarDate.month, lunarDate.day, lunarDate.year)
+    }
+    val gregorianFestival = remember(date) {
+        ChineseCalendarHelper.getGregorianFestival(date.monthValue, date.dayOfMonth)
+    }
+    
+    // 农历显示文字（优先级：节日 > 节气 > 农历日）
+    val lunarText = when {
+        festival.isNotEmpty() -> festival
+        gregorianFestival.isNotEmpty() -> gregorianFestival
+        solarTerm.isNotEmpty() -> solarTerm
+        else -> lunarDate.dayCn
+    }
     
     Box(
         modifier = modifier
-            .padding(horizontal = 2.dp)
-            .aspectRatio(1f)
-            .clip(RoundedCornerShape(8.dp))
+            .padding(2.dp)
+            .clip(CircleShape)
             .background(backgroundColor)
             .clickable(onClick = onClick),
         contentAlignment = Alignment.Center
@@ -177,35 +230,35 @@ private fun DayCell(
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Center
         ) {
-            // 日期数字
+            // 公历日期
             Text(
-                text = day.date.dayOfMonth.toString(),
-                style = MaterialTheme.typography.bodyLarge,
-                color = textColor,
-                fontWeight = if (day.isToday || day.isSelected) FontWeight.Bold else FontWeight.Normal,
-                fontSize = 16.sp
+                text = date.dayOfMonth.toString(),
+                style = MaterialTheme.typography.bodyMedium,
+                fontWeight = if (isToday || isSelected) FontWeight.Bold else FontWeight.Normal,
+                color = textColor
             )
             
             // 农历日期或节日
             Text(
-                text = day.getLunarDisplayText(),
+                text = lunarText,
                 style = MaterialTheme.typography.labelSmall,
-                color = lunarTextColor,
-                fontSize = 10.sp,
+                fontSize = 9.sp,
+                color = textColor.copy(alpha = 0.7f),
                 maxLines = 1
             )
             
             // 事件指示器
-            if (day.hasEvent) {
+            if (hasEvent) {
                 Box(
                     modifier = Modifier
-                        .padding(top = 2.dp)
                         .size(4.dp)
-                        .clip(CircleShape)
                         .background(
-                            if (day.isSelected) Color.White else EventIndicator
+                            if (isSelected) Color.White else EventIndicator,
+                            CircleShape
                         )
                 )
+            } else {
+                Spacer(modifier = Modifier.height(4.dp))
             }
         }
     }
