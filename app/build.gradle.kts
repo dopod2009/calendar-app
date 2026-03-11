@@ -3,7 +3,8 @@ plugins {
     id("org.jetbrains.kotlin.android")
     id("com.google.dagger.hilt.android")
     id("com.google.devtools.ksp")
-    id("com.google.gms.google-services")
+    // TODO: Enable when google-services.json is configured
+    // id("com.google.gms.google-services")
 }
 
 android {
@@ -141,9 +142,9 @@ dependencies {
     implementation("com.google.api-client:google-api-client-android:2.2.0")
     implementation("com.google.apis:google-api-services-calendar:v3-rev20231123-2.0.0")
 
-    // Firebase
-    implementation(platform("com.google.firebase:firebase-bom:32.7.1"))
-    implementation("com.google.firebase:firebase-messaging-ktx")
+    // Firebase (TODO: Enable when google-services.json is configured)
+    // implementation(platform("com.google.firebase:firebase-bom:32.7.1"))
+    // implementation("com.google.firebase:firebase-messaging-ktx")
 
     // Coil (Image Loading)
     implementation("io.coil-kt:coil-compose:2.5.0")
