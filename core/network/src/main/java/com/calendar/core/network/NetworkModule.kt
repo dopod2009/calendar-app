@@ -1,5 +1,7 @@
 package com.calendar.core.network
 
+import android.content.Context
+import android.content.SharedPreferences
 import com.calendar.core.network.api.EventApi
 import com.calendar.core.network.api.AuthApi
 import com.calendar.core.network.api.SyncApi
@@ -10,6 +12,7 @@ import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -26,6 +29,15 @@ object NetworkModule {
     private const val CONNECT_TIMEOUT = 30L
     private const val READ_TIMEOUT = 30L
     private const val WRITE_TIMEOUT = 30L
+    private const val PREFS_NAME = "calendar_prefs"
+
+    @Provides
+    @Singleton
+    fun provideSharedPreferences(
+        @ApplicationContext context: Context
+    ): SharedPreferences {
+        return context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
+    }
 
     @Provides
     @Singleton

@@ -6,7 +6,7 @@ plugins {
 }
 
 android {
-    namespace = "com.calendar.core.data"
+    namespace = "com.calendar.core.network"
     compileSdk = 34
 
     defaultConfig {
@@ -32,16 +32,21 @@ android {
 }
 
 dependencies {
-    implementation(project(":core:common"))
     implementation(project(":core:domain"))
-    implementation(project(":core:network"))
     
     implementation("androidx.core:core-ktx:1.12.0")
     
-    // Room
-    implementation("androidx.room:room-runtime:2.6.1")
-    implementation("androidx.room:room-ktx:2.6.1")
-    ksp("androidx.room:room-compiler:2.6.1")
+    // Retrofit
+    implementation("com.squareup.retrofit2:retrofit:2.9.0")
+    implementation("com.squareup.retrofit2:converter-moshi:2.9.0")
+    
+    // OkHttp
+    implementation("com.squareup.okhttp3:okhttp:4.12.0")
+    implementation("com.squareup.okhttp3:logging-interceptor:4.12.0")
+    
+    // Moshi
+    implementation("com.squareup.moshi:moshi:1.15.0")
+    implementation("com.squareup.moshi:moshi-kotlin:1.15.0")
     
     // Hilt
     implementation("com.google.dagger:hilt-android:2.48")
@@ -49,6 +54,9 @@ dependencies {
     
     // Coroutines
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.3")
+    
+    // DataStore for token storage
+    implementation("androidx.datastore:datastore-preferences:1.0.0")
     
     // Testing
     testImplementation("junit:junit:4.13.2")
