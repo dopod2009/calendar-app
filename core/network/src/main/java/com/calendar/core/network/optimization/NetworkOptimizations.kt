@@ -1,6 +1,9 @@
 package com.calendar.core.network.optimization
 
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.async
+import kotlinx.coroutines.coroutineScope
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.withContext
 import retrofit2.Response
 
@@ -32,7 +35,7 @@ object NetworkOptimizations {
             }
 
             if (attempt < maxRetries - 1) {
-                kotlinx.coroutines.delay(initialDelayMs * (attempt + 1))
+                delay(initialDelayMs * (attempt + 1))
             }
         }
 
@@ -68,14 +71,14 @@ object NetworkOptimizations {
         suspend fun execute(
             key: String,
             request: suspend () -> T
-        ): T {
+        ): T = coroutineScope {
             // 检查是否有相同请求正在执行
             pendingRequests[key]?.let {
-                return it.await()
+                return@coroutineScope it.await()
             }
 
             // 创建新请求
-            val deferred = kotlinx.coroutines.GlobalScope.async(Dispatchers.IO) {
+            val deferred = async(Dispatchers.IO) {
                 try {
                     request()
                 } finally {
@@ -84,7 +87,7 @@ object NetworkOptimizations {
             }
 
             pendingRequests[key] = deferred
-            return deferred.await()
+            deferred.await()
         }
     }
 
@@ -132,7 +135,7 @@ object NetworkOptimizations {
             val timeSinceLastRequest = now - lastRequestTime
 
             if (timeSinceLastRequest < intervalMs) {
-                kotlinx.coroutines.delay(intervalMs - timeSinceLastRequest)
+                delay(intervalMs - timeSinceLastRequest)
             }
 
             lastRequestTime = System.currentTimeMillis()
